@@ -1,1 +1,0 @@
-/home/nathan/Projects/learn-rust/RPL-Textbook/guessing_game/target/debug/guessing_game: /home/nathan/Projects/learn-rust/RPL-Textbook/guessing_game/src/lib.rs /home/nathan/Projects/learn-rust/RPL-Textbook/guessing_game/src/main.rs
