@@ -1,5 +1,5 @@
-use std::io;
 use std::cmp::Ordering;
+use std::io;
 
 use rand::Rng;
 
@@ -25,14 +25,16 @@ impl Guess {
 fn main() {
     println!("\nGuess a number betwene 1 and 100!");
 
-    let mut secret_number: isize = rand::thread_rng().gen_range(1,101);
+    let mut secret_number: isize = rand::thread_rng().gen_range(1, 101);
 
     loop {
         println!("\nPlease input your guess: ");
 
         let mut guess = String::new();
 
-        io::stdin().read_line(&mut guess).expect("Read line failed for stdin");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Read line failed for stdin");
 
         // String to int
         let guess: isize = match guess.trim().parse() {
@@ -40,7 +42,7 @@ fn main() {
             Err(err) => {
                 println!("Parsing error: {}", err);
                 continue;
-            },
+            }
         };
 
         // Check range before assigning guess value
@@ -49,7 +51,7 @@ fn main() {
             Err(err) => {
                 println!("Range error: {}", err);
                 continue;
-            },
+            }
         };
 
         println!("You guessed the number {}", guess.value());
@@ -60,7 +62,9 @@ fn main() {
                 println!("You win! Congrats!\nWould you like to continue? (Y/N)");
 
                 let mut answer = String::new();
-                io::stdin().read_line(&mut answer).expect("Read line failed for stdin");
+                io::stdin()
+                    .read_line(&mut answer)
+                    .expect("Read line failed for stdin");
 
                 let answer = answer.to_uppercase().chars().next().unwrap();
 
@@ -68,8 +72,8 @@ fn main() {
                     break;
                 }
 
-                secret_number = rand::thread_rng().gen_range(1,101);
-            },
+                secret_number = rand::thread_rng().gen_range(1, 101);
+            }
             Ordering::Greater => println!("Too large"),
         };
     }
