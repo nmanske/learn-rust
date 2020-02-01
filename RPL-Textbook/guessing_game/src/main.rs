@@ -6,18 +6,18 @@ use rand::Rng;
 extern crate rand;
 
 pub struct Guess {
-    value: isize,
+    value: u8,
 }
 
 impl Guess {
-    pub fn new(value: isize) -> Result<Guess, &'static str> {
+    pub fn new(value: u8) -> Result<Guess, &'static str> {
         if value < 1 || value > 100 {
             return Err("guess must be between 0 and 100!");
         }
         Ok(Guess { value })
     }
 
-    pub fn value(&self) -> isize {
+    pub fn value(&self) -> u8 {
         self.value
     }
 }
@@ -25,7 +25,7 @@ impl Guess {
 fn main() {
     println!("\nGuess a number betwene 1 and 100!");
 
-    let mut secret_number: isize = rand::thread_rng().gen_range(1, 101);
+    let mut secret_number: u8 = rand::thread_rng().gen_range(1, 101);
 
     loop {
         println!("\nPlease input your guess: ");
@@ -37,10 +37,10 @@ fn main() {
             .expect("Read line failed for stdin");
 
         // String to int
-        let guess: isize = match guess.trim().parse() {
+        let guess: u8 = match guess.trim().parse() {
             Ok(num) => num,
             Err(err) => {
-                println!("Parsing error: {}", err);
+                println!("Parsing error: {:?}", err);
                 continue;
             }
         };
@@ -49,7 +49,7 @@ fn main() {
         let guess = match Guess::new(guess) {
             Ok(val) => val,
             Err(err) => {
-                println!("Range error: {}", err);
+                println!("Range error: {:?}", err);
                 continue;
             }
         };
